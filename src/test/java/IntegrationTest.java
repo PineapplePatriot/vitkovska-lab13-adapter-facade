@@ -11,7 +11,8 @@ class IntegrationTest {
         Authorization auth = new Authorization();
         if (auth.login(db)) {
             ReportBuilder reportBuilder = new ReportBuilder(db);
-            Assertions.assertNotNull(reportBuilder.getDb(), "ReportBuilder should contain a non-null Database instance.");
+            Assertions.assertNotNull(reportBuilder.getDb(),
+             "ReportBuilder should contain a non-null Database instance.");
         } else {
             Assertions.fail("Authorization failed in main flow.");
         }

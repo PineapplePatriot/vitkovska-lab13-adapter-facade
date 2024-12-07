@@ -13,11 +13,13 @@ class DatabaseTest {
 
     @Test
     void testGetUserData() {
-        Assertions.assertEquals("hello", db.getUserData(), "getUserData should return 'hello' from the legacy method.");
+        Assertions.assertEquals("hello", db.getUserData(),
+         "getUserData should return 'hello' from the legacy method.");
     }
 
     @Test
     void testGetStaticData() {
-        Assertions.assertEquals("hello2", db.getStaticData(), "getStaticData should return 'hello2' from the legacy method.");
+        Assertions.assertEquals("hello2", db.getStaticData(), 
+        "getStaticData should return 'hello2' from the legacy method.");
     }
 }

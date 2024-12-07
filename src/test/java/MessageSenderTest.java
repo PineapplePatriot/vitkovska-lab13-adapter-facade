@@ -23,11 +23,17 @@ class MessageSenderTest {
     void setUp() {
         messageSender = new MessageSender();
         users = new ArrayList<>();
-        TwitterUser twitterUser = new TwitterUser("active_twitter@example.com", "USA", LocalDateTime.now().minusMinutes(30));
+        TwitterUser twitterUser = new TwitterUser(
+            "active_twitter@example.com", "USA", 
+            LocalDateTime.now().minusMinutes(30));
         users.add(new TwitterUserAdapter(twitterUser));
-        FacebookUser facebookUser = new FacebookUser("active_facebook@example.com", "USA", LocalDateTime.now().minusMinutes(50));
+        FacebookUser facebookUser = new FacebookUser(
+            "active_facebook@example.com", "USA", 
+            LocalDateTime.now().minusMinutes(50));
         users.add(new FacebookUserAdapter(facebookUser));
-        TwitterUser inactiveTwitterUser = new TwitterUser("inactive_twitter@example.com", "USA", LocalDateTime.now().minusHours(2));
+        TwitterUser inactiveTwitterUser = new TwitterUser(
+            "inactive_twitter@example.com", "USA", 
+            LocalDateTime.now().minusHours(2));
         users.add(new TwitterUserAdapter(inactiveTwitterUser));
     }
 
@@ -35,22 +41,29 @@ class MessageSenderTest {
     void testSendMessageToActiveUsers() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        messageSender.send("Hello, active users!", users, "USA");
+        messageSender.send("Hello, active users!", 
+        users, "USA");
         String output = outputStream.toString();
 
-        Assertions.assertTrue(output.contains("active_twitter@example.com"), "Expected active Twitter user to receive a message.");
-        Assertions.assertTrue(output.contains("active_facebook@example.com"), "Expected active Facebook user to receive a message.");
-        Assertions.assertFalse(output.contains("inactive_twitter@example.com"), "Inactive user should not receive a message.");
+        Assertions.assertTrue(output.contains("active_twitter@example.com"),
+         "Expected active Twitter user to receive a message.");
+        Assertions.assertTrue(output.contains("active_facebook@example.com"), 
+        "Expected active Facebook user to receive a message.");
+        Assertions.assertFalse(output.contains("inactive_twitter@example.com"), 
+        "Inactive user should not receive a message.");
     }
 
     @Test
     void testSendMessageToNonMatchingCountry() {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
-        messageSender.send("Hello, active users!", users, "Canada");
+        messageSender.send("Hello, active users!", 
+        users, "Canada");
         String output = outputStream.toString();
 
-        Assertions.assertFalse(output.contains("active_twitter@example.com"), "No users from Canada should receive a message.");
-        Assertions.assertFalse(output.contains("active_facebook@example.com"), "No users from Canada should receive a message.");
+        Assertions.assertFalse(output.contains("active_twitter@example.com"), 
+        "No users from Canada should receive a message.");
+        Assertions.assertFalse(output.contains("active_facebook@example.com"), 
+        "No users from Canada should receive a message.");
     }
 }

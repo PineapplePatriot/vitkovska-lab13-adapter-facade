@@ -5,8 +5,10 @@ import java.util.List;
 
 public class AdapterPatternExample {
     public static void main(String[] args) {
-        TwitterUser twitterUser = new TwitterUser("twitter@example.com", "USA", LocalDateTime.now().minusMinutes(30));
-        FacebookUser facebookUser = new FacebookUser("facebook@example.com", "USA", LocalDateTime.now().minusMinutes(50));
+        TwitterUser twitterUser = new TwitterUser("twitter@example.com",
+         "USA", LocalDateTime.now().minusMinutes(30));
+        FacebookUser facebookUser = new FacebookUser("facebook@example.com",
+         "USA", LocalDateTime.now().minusMinutes(50));
 
         User twitterAdapter = new TwitterUserAdapter(twitterUser);
         User facebookAdapter = new FacebookUserAdapter(facebookUser);

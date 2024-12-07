@@ -6,7 +6,8 @@ public class FacebookUser {
     private String userCountry;
     private LocalDateTime userActiveTime;
 
-    public FacebookUser(String email, String userCountry, LocalDateTime userActiveTime) {
+    public FacebookUser(String email, String userCountry, 
+    LocalDateTime userActiveTime) {
         this.email = email;
         this.userCountry = userCountry;
         this.userActiveTime = userActiveTime;

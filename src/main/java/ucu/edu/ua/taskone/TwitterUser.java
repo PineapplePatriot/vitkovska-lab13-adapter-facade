@@ -6,7 +6,8 @@ public class TwitterUser {
     private String country;
     private LocalDateTime lastActiveTime;
 
-    public TwitterUser(String userMail, String country, LocalDateTime lastActiveTime) {
+    public TwitterUser(String userMail, String country, 
+    LocalDateTime lastActiveTime) {
         this.userMail = userMail;
         this.country = country;
         this.lastActiveTime = lastActiveTime;
