@@ -2,6 +2,10 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.io.IOException;
 import ucu.edu.ua.taskthree.PDLReaderSubsystem;
 import ucu.edu.ua.taskthree.WebScraperSubsystem;
@@ -13,18 +17,32 @@ import ucu.edu.ua.taskthree.Company;
 class CompanyInfoFacadeTest {
 
     @Test
-    void testPDLReaderSubsystem() throws Exception {
-        String mockResponse = 
-        "{\"name\": \"Test Company\", \"description\": \"A sample company\"}";
-        PDLReaderSubsystem pdlReader = Mockito.mock(
-            PDLReaderSubsystem.class);
-        Mockito.when(pdlReader.getCompanyInfo("test.com"))
-        .thenReturn(new JSONObject(mockResponse));
-        JSONObject response = pdlReader.getCompanyInfo("test.com");
-        Assertions.assertEquals("Test Company", 
-        response.getString("name"));
-        Assertions.assertEquals("A sample company", 
-        response.getString("description"));
+    void testPDLReaderSubsystem() {
+        String mockResponse = "{"
+            + "\"name\": \"Test Company\", "
+            + "\"description\": \"A sample company\""
+            + "}";
+
+        PDLReaderSubsystem pdlReader = 
+        Mockito.mock(PDLReaderSubsystem.class);
+
+        try {
+            Mockito.when(pdlReader.getCompanyInfo("test.com"))
+                .thenReturn(new JSONObject(mockResponse));
+
+            JSONObject result = pdlReader
+            .getCompanyInfo("test.com");
+            assertEquals("Test Company", 
+            result.getString("name"));
+            assertEquals("A sample company", 
+            result.getString("description"));
+        } catch (IOException e) {
+            fail("PDLReaderSubsystem threw an IOException: " 
+            + e.getMessage());
+        } catch (org.json.JSONException e) {
+            fail("PDLReaderSubsystem threw a JSONException: " 
+            + e.getMessage());
+        }
     }
 
     @Test
@@ -57,7 +75,8 @@ class CompanyInfoFacadeTest {
 
         Mockito.when(mockPDL.getCompanyInfo("test.com"))
             .thenReturn(new JSONObject(
-                "{\"name\": \"Mock Company\", \"description\": \"Mock description\"}"));
+                "{\"name\": \"Mock Company\", " +
+                "\"description\": \"Mock description\"}"));
                 Mockito.when(mockScraper.scrapeDescription("test.com"))
                 .thenReturn("Fallback description");
                 Mockito.when(mockBrandfetch.fetchLogo("test.com"))
@@ -72,9 +91,14 @@ class CompanyInfoFacadeTest {
             }
         };
 
-        Company company = facade.getCompanyDetails("test.com");
-        Assertions.assertEquals("Mock Company", company.getName());
-        Assertions.assertEquals("Mock description", company.getDescription());
-        Assertions.assertEquals("https://brandfetch.com/logo/test.com", company.getLogo());
+        Company company = facade
+        .getCompanyDetails("test.com");
+        Assertions.assertEquals("Mock Company", 
+        company.getName());
+        Assertions.assertEquals("Mock description", 
+        company.getDescription());
+        Assertions.assertEquals(
+        "https://brandfetch.com/logo/test.com", 
+        company.getLogo());
     }
 }

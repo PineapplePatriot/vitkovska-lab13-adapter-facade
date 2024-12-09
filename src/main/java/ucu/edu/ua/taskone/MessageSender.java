@@ -8,8 +8,8 @@ public class MessageSender {
         for (User user : users) {
             if (user.getCountry().equalsIgnoreCase(country)
                     && user.getLastActiveTime().isAfter(now.minusHours(1))) {
-                System.out.println("Sending message to " + user.getEmail() + 
-                ": " + text);
+                System.out.println("Sending message to " + user.getEmail() 
+                + ": " + text);
             }
         }
     }
