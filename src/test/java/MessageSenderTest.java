@@ -16,6 +16,9 @@ import ucu.edu.ua.taskone.FacebookUserAdapter;
 
 
 class MessageSenderTest {
+    private static final int ACTIVE_USER_THRESHOLD_MINUTES = 30;
+    private static final int ANOTHER_CONSTANT_EXAMPLE = 50;
+    private static final int ANOTHER_CONSTANT_TWO = 2;
     private MessageSender messageSender;
     private List<User> users;
 
@@ -25,15 +28,18 @@ class MessageSenderTest {
         users = new ArrayList<>();
         TwitterUser twitterUser = new TwitterUser(
             "active_twitter@example.com", "USA", 
-            LocalDateTime.now().minusMinutes(30));
+            LocalDateTime.now().minusMinutes(
+                ACTIVE_USER_THRESHOLD_MINUTES));
         users.add(new TwitterUserAdapter(twitterUser));
         FacebookUser facebookUser = new FacebookUser(
             "active_facebook@example.com", "USA", 
-            LocalDateTime.now().minusMinutes(50));
+            LocalDateTime.now().minusMinutes(
+                ANOTHER_CONSTANT_EXAMPLE));
         users.add(new FacebookUserAdapter(facebookUser));
         TwitterUser inactiveTwitterUser = new TwitterUser(
             "inactive_twitter@example.com", "USA", 
-            LocalDateTime.now().minusHours(2));
+            LocalDateTime.now().minusHours(
+                ANOTHER_CONSTANT_TWO));
         users.add(new TwitterUserAdapter(inactiveTwitterUser));
     }
 

@@ -2,10 +2,7 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
+import org.junit.jupiter.api.Assertions;
 import java.io.IOException;
 import ucu.edu.ua.taskthree.PDLReaderSubsystem;
 import ucu.edu.ua.taskthree.WebScraperSubsystem;
@@ -32,15 +29,17 @@ class CompanyInfoFacadeTest {
 
             JSONObject result = pdlReader
             .getCompanyInfo("test.com");
-            assertEquals("Test Company", 
+            Assertions.assertEquals("Test Company", 
             result.getString("name"));
-            assertEquals("A sample company", 
+            Assertions.assertEquals("A sample company", 
             result.getString("description"));
         } catch (IOException e) {
-            fail("PDLReaderSubsystem threw an IOException: " 
+            Assertions.fail("PDLReaderSubsystem"
+            + "threw an IOException: " 
             + e.getMessage());
         } catch (org.json.JSONException e) {
-            fail("PDLReaderSubsystem threw a JSONException: " 
+            Assertions.fail("PDLReaderSubsystem"
+            + "threw a JSONException: " 
             + e.getMessage());
         }
     }
@@ -75,8 +74,8 @@ class CompanyInfoFacadeTest {
 
         Mockito.when(mockPDL.getCompanyInfo("test.com"))
             .thenReturn(new JSONObject(
-                "{\"name\": \"Mock Company\", " +
-                "\"description\": \"Mock description\"}"));
+                "{\"name\": \"Mock Company\", " 
+                + "\"description\": \"Mock description\"}"));
                 Mockito.when(mockScraper.scrapeDescription("test.com"))
                 .thenReturn("Fallback description");
                 Mockito.when(mockBrandfetch.fetchLogo("test.com"))

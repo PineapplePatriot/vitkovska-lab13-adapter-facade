@@ -13,8 +13,8 @@ public class PDLReaderSubsystem {
     }
 
     public JSONObject getCompanyInfo(String website) throws IOException {
-        URL url = new URL
-        ("https://api.peopledatalabs.com/v5/company/enrich?website=" 
+        URL url = new URL(
+        "https://api.peopledatalabs.com/v5/company/enrich?website=" 
         + website);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");

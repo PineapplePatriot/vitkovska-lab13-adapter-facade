@@ -1,4 +1,6 @@
 package ucu.edu.ua.taskthree;
+import java.io.IOException;
+
 import org.json.JSONObject;
 
 public class CompanyInfoFacade {
@@ -22,10 +24,12 @@ public class CompanyInfoFacade {
             name = pdlData.optString("name", "Unknown Company");
             description = pdlData.optString("description",
              "No description available");
-        } catch (Exception e) {
-            System.err.println("PDL Error: " + e.getMessage());
+        } catch (IOException e) {
+            System.err.println("PDLReaderSubsystem: Failed to fetch company info due to an IO error: " + e.getMessage());
+        } catch (org.json.JSONException e) {
+            System.err.println("PDLReaderSubsystem: Failed to parse company info JSON: " + e.getMessage());
         }
-    
+
         if (description.isEmpty()) {
             description = webScraper.scrapeDescription(website);
         }
