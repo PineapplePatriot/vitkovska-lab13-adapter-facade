@@ -25,9 +25,13 @@ public class CompanyInfoFacade {
             description = pdlData.optString("description",
              "No description available");
         } catch (IOException e) {
-            System.err.println("PDLReaderSubsystem: Failed to fetch company info due to an IO error: " + e.getMessage());
+            System.err.println("PDLReaderSubsystem:" 
+            + "Failed to fetch company info due to an IO error: " 
+            + e.getMessage());
         } catch (org.json.JSONException e) {
-            System.err.println("PDLReaderSubsystem: Failed to parse company info JSON: " + e.getMessage());
+            System.err.println("PDLReaderSubsystem:" 
+            + "Failed to parse company info JSON: " 
+            + e.getMessage());
         }
 
         if (description.isEmpty()) {

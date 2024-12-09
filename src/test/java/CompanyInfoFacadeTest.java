@@ -2,7 +2,6 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 import org.mockito.Mockito;
-import org.junit.jupiter.api.Assertions;
 import java.io.IOException;
 import ucu.edu.ua.taskthree.PDLReaderSubsystem;
 import ucu.edu.ua.taskthree.WebScraperSubsystem;
